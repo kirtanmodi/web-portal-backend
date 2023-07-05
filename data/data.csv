@@ -1,0 +1,4 @@
+id,name,age,email,city
+1,John,30,john@example.com,New York
+2,Jane,25,jane@example.com,Los Angeles
+3,Bob,35,bob@example.com,Chicago
