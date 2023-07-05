@@ -18,10 +18,6 @@ describe('Data Controller', () => {
         expect(allData).toHaveLength(3);
     });
 
-    test('should get data by id', () => {
-        const data = dataController.getDataById('2');
-        expect(data).toEqual(['2', 'Jane', '25', 'jane@example.com', 'Los Angeles']);
-    });
 
     test('should create new data', () => {
         const newData = ['4', 'Mark', '40', 'mark@example.com', 'San Francisco'];
@@ -31,13 +27,31 @@ describe('Data Controller', () => {
         expect(allData).toHaveLength(4);
     });
 
+    test('should get data by id', () => {
+        const data = dataController.getDataById('2');
+        expect(data).toEqual({
+            id: '2',
+            name: 'Jane',
+            age: '25',
+            email: 'jane@example.com',
+            city: 'Los Angeles'
+        });
+    });
+
     test('should update data', () => {
-        const updatedData = ['2', 'Jane Doe', '30', 'janedoe@example.com', 'Los Angeles'];
+        const updatedData = {
+            id: '2',
+            name: 'Jane Doe',
+            age: '30',
+            email: 'janedoe@example.com',
+            city: 'Los Angeles'
+        };
         const result = dataController.updateData(updatedData);
         expect(result).toEqual(updatedData);
         const data = dataController.getDataById('2');
         expect(data).toEqual(updatedData);
     });
+
 
     test('should delete data', () => {
         const deletedData = dataController.deleteData('1');
