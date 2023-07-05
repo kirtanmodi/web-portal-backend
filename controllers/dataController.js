@@ -1,40 +1,53 @@
-let data = require('../data/data.csv').split('\n').slice(1).map(row => row.split(','));
+const fs = require('fs');
+const csv = require('csv-parser');
+
+const dataFilePath = 'data/data.csv';
+let data = [];
+
+fs.createReadStream(dataFilePath)
+    .pipe(csv())
+    .on('data', (row) => {
+        data.push(row);
+    })
+    .on('end', () => {
+        console.log('CSV file has been loaded.');
+    });
 
 function getAllData() {
-  return data;
+    return data;
 }
 
 function getDataById(id) {
-  return data.find(item => item[0] === id);
+    return data.find((item) => item.id === id);
 }
 
 function createData(newData) {
-  data.push(newData);
-  return newData;
+    data.push(newData);
+    return newData;
 }
 
 function updateData(updatedData) {
-  const index = data.findIndex(item => item[0] === updatedData[0]);
-  if (index !== -1) {
-    data[index] = updatedData;
-    return updatedData;
-  }
-  return null;
+    const index = data.findIndex((item) => item.id === updatedData.id);
+    if (index !== -1) {
+        data[index] = updatedData;
+        return updatedData;
+    }
+    return null;
 }
 
 function deleteData(id) {
-  const index = data.findIndex(item => item[0] === id);
-  if (index !== -1) {
-    const deletedItem = data.splice(index, 1)[0];
-    return deletedItem;
-  }
-  return null;
+    const index = data.findIndex((item) => item.id === id);
+    if (index !== -1) {
+        const deletedItem = data.splice(index, 1)[0];
+        return deletedItem;
+    }
+    return null;
 }
 
 module.exports = {
-  getAllData,
-  getDataById,
-  createData,
-  updateData,
-  deleteData,
+    getAllData,
+    getDataById,
+    createData,
+    updateData,
+    deleteData,
 };
