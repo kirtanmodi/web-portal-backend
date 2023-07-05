@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/kirtanmodi/web-portal-backend#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "express": "^4.18.2"
   },
