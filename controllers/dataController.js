@@ -32,6 +32,10 @@ function getDataById(id) {
 }
 
 function createData(newData) {
+    const existingData = data.find((item) => item.id === newData.id);
+    if (existingData) {
+        return null; // Return null if user with the same ID already exists
+    }
     data.push(newData);
     saveDataToFile();
     return newData;
