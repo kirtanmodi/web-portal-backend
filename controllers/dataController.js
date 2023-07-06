@@ -13,6 +13,16 @@ fs.createReadStream(dataFilePath)
         console.log('CSV file has been loaded.');
     });
 
+function saveDataToFile() {
+    const lines = ['"id","name","age","email","city"'];
+    data.forEach((row) => {
+        const values = Object.values(row).map((value) => `"${value}"`);
+        lines.push(values.join(','));
+    });
+    fs.writeFileSync(dataFilePath, lines.join('\n'));
+    console.log('Data has been saved to the file.');
+}
+
 function getAllData() {
     return data;
 }
@@ -23,6 +33,7 @@ function getDataById(id) {
 
 function createData(newData) {
     data.push(newData);
+    saveDataToFile();
     return newData;
 }
 
@@ -30,6 +41,7 @@ function updateData(updatedData) {
     const index = data.findIndex((item) => item.id === updatedData.id);
     if (index !== -1) {
         data[index] = updatedData;
+        saveDataToFile();
         return updatedData;
     }
     return null;
@@ -39,6 +51,7 @@ function deleteData(id) {
     const index = data.findIndex((item) => item.id === id);
     if (index !== -1) {
         const deletedItem = data.splice(index, 1)[0];
+        saveDataToFile();
         return deletedItem;
     }
     return null;

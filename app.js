@@ -12,7 +12,7 @@ app.use(cors());
 app.use('/data', dataRoutes);
 
 // Start the server
-const port = 3000;
+const port = 11000;
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
