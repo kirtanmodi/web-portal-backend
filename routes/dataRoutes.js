@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;
-    updatedData[0] = id; // Ensure the ID from the URL is used
+    updatedData.id = id; // Ensure the ID from the URL is used
     const result = dataController.updateData(updatedData);
     if (!result) {
         return res.status(404).json({ error: 'Data not found.' });
